@@ -7,16 +7,8 @@ S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 ]
 -.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
-u
-Eapp/src/main/java/com/example/signaldetector/activity/MainActivity.kt,b\9\b995fa1ba423cb83871476d552aa7890211171c2
 C
 settings.gradle.kts,7\4\749edfcc96398253e5b3416184e95c46621da850
-E
-data/build.gradle.kts,9\f\9f5470ef43fd1acab01d54a63bdece9a90dec1b7
-G
-shared/build.gradle.kts,c\7\c75a46202110405791c74357375762fb05087d5b
-q
-Aapp/src/main/java/com/example/signaldetector/view/MainActivity.kt,0\b\0bc5691dbbe45d3ec26103c6f938d309c5cf17d4
 z
 Japp/src/main/java/com/example/signaldetector/view/activity/MainActivity.kt,1\e\1e75a37ad28b4baf5bdeeaca2b93ad53bcc37dab
 p
@@ -36,3 +28,13 @@ A
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+{
+Kapp/src/main/java/com/example/signaldetector/model/api/UnwiredApiService.kt,6\7\6771a51a1fd7f0486e975ea36a7c8679c6c08b1b
+r
+Bapp/src/main/java/com/example/signaldetector/model/di/ApiModule.kt,4\0\4075084793d228da63d2a09cb93313d2bbce4604
+v
+Fapp/src/main/java/com/example/signaldetector/model/repo/UnwiredRepo.kt,c\3\c381a30d16f5f7abd758af02c4bfa99e6ec52085
+{
+Kapp/src/main/java/com/example/signaldetector/model/repo/UniwiredRepoImpl.kt,2\c\2ce65d22abbaeffc07e8fa762d8e2e8c67616f60
+z
+Japp/src/main/java/com/example/signaldetector/model/repo/UnwiredRepoImpl.kt,7\1\71097e8a1ef10d049f68681b2c3c624f17f1afba
