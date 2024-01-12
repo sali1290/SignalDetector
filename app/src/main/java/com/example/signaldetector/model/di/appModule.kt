@@ -3,6 +3,7 @@ package com.example.signaldetector.model.di
 import com.example.signaldetector.model.api.UnwiredApiService
 import com.example.signaldetector.model.repo.UnwiredRepo
 import com.example.signaldetector.model.repo.UnwiredRepoImpl
+import com.example.signaldetector.model.utility.NetWorkHelper
 import com.example.signaldetector.viewmodel.LocationByCellInfoViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -24,6 +25,7 @@ val appModule = module {
             .build()
             .create(UnwiredApiService::class.java)
     }
-    single<UnwiredRepo> { UnwiredRepoImpl(get()) }
+    single { NetWorkHelper(get()) }
+    single<UnwiredRepo> { UnwiredRepoImpl(get(), get()) }
     viewModel { LocationByCellInfoViewModel(get()) }
 }

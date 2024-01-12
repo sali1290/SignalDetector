@@ -44,3 +44,11 @@ Bapp/src/main/java/com/example/signaldetector/model/di/appModule.kt,b\5\b5f0086
 Uapp/src/main/java/com/example/signaldetector/viewmodel/LocationByCellInfoViewModel.kt,4\8\48d1edc95ba26814aebb971de700a59dc1bb0899
 }
 Mapp/src/main/java/com/example/signaldetector/application/SignalDetectorApp.kt,4\0\407e027e1c4da3c582b77ea1a03c8821bfb9bb27
+Å
+Qapp/src/main/java/com/example/signaldetector/view/components/CellInfoCollector.kt,8\1\81cf319b9eb7c00ed74a89a78e2c5801b16b292c
+~
+Napp/src/main/java/com/example/signaldetector/view/utility/CellInfoCollector.kt,d\c\dc3347533704da395be07a613074bd7d1330a695
+
+Oapp/src/main/java/com/example/signaldetector/model/utility/CellInfoCollector.kt,c\1\c1be250f87bdaf5509df466c5662eb57dbc68096
+{
+Kapp/src/main/java/com/example/signaldetector/model/utility/NetworkHelper.kt,b\2\b2509e23d2ca23407dc11f332a5618072607d90b
