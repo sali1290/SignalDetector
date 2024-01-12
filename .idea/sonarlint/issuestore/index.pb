@@ -23,3 +23,16 @@ p
 @app/src/main/java/com/example/signaldetector/view/theme/Color.kt,7\6\76665c26c85a707d0ca5b01ba3d878e363202936
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+r
+Bapp/src/main/java/com/example/signaldetector/model/dto/CellInfo.kt,9\8\98c6ed9272519b4a35061fcda0e362baa5c1438c
+n
+>app/src/main/java/com/example/signaldetector/model/dto/Cell.kt,2\6\266718aed83c01e7ba30511ec9199b852741f11b
+s
+Capp/src/main/java/com/example/signaldetector/model/dto/RadioType.kt,7\7\77488e20c3c55466caeaaedf22ec4d764cd05a4e
+v
+Fapp/src/main/java/com/example/signaldetector/model/dto/CellLocation.kt,9\1\9139443b7ed5cd909bc34aa100ddf9f7f841fe84
+A
+gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
