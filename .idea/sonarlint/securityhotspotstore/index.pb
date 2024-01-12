@@ -1,6 +1,4 @@
 
-q
-Aapp/src/main/java/com/example/signaldetector/view/MainActivity.kt,0\b\0bc5691dbbe45d3ec26103c6f938d309c5cf17d4
 @
 build.gradle.kts,d\b\dbcff70658daf80b53ce624f6adcaa529df5ed8d
 D
@@ -9,3 +7,19 @@ S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 ]
 -.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
+u
+Eapp/src/main/java/com/example/signaldetector/activity/MainActivity.kt,b\9\b995fa1ba423cb83871476d552aa7890211171c2
+C
+settings.gradle.kts,7\4\749edfcc96398253e5b3416184e95c46621da850
+E
+data/build.gradle.kts,9\f\9f5470ef43fd1acab01d54a63bdece9a90dec1b7
+G
+shared/build.gradle.kts,c\7\c75a46202110405791c74357375762fb05087d5b
+q
+Aapp/src/main/java/com/example/signaldetector/view/MainActivity.kt,0\b\0bc5691dbbe45d3ec26103c6f938d309c5cf17d4
+z
+Japp/src/main/java/com/example/signaldetector/view/activity/MainActivity.kt,1\e\1e75a37ad28b4baf5bdeeaca2b93ad53bcc37dab
+p
+@app/src/main/java/com/example/signaldetector/view/theme/Color.kt,7\6\76665c26c85a707d0ca5b01ba3d878e363202936
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e

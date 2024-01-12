@@ -1,4 +1,4 @@
-package com.example.signaldetector.view
+package com.example.signaldetector.view.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
