@@ -38,3 +38,9 @@ Fapp/src/main/java/com/example/signaldetector/model/repo/UnwiredRepo.kt,c\3\c38
 Kapp/src/main/java/com/example/signaldetector/model/repo/UniwiredRepoImpl.kt,2\c\2ce65d22abbaeffc07e8fa762d8e2e8c67616f60
 z
 Japp/src/main/java/com/example/signaldetector/model/repo/UnwiredRepoImpl.kt,7\1\71097e8a1ef10d049f68681b2c3c624f17f1afba
+r
+Bapp/src/main/java/com/example/signaldetector/model/di/appModule.kt,b\5\b5f0086ed7401e88b55178b888eda6f63d7aa2fc
+…
+Uapp/src/main/java/com/example/signaldetector/viewmodel/LocationByCellInfoViewModel.kt,4\8\48d1edc95ba26814aebb971de700a59dc1bb0899
+}
+Mapp/src/main/java/com/example/signaldetector/application/SignalDetectorApp.kt,4\0\407e027e1c4da3c582b77ea1a03c8821bfb9bb27

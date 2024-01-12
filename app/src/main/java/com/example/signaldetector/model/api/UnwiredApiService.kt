@@ -10,8 +10,4 @@ interface UnwiredApiService {
 
     @POST("v2/process.php")
     suspend fun getLocationByCellInfo(@Body cellInfo: CellInfo): Response<CellLocation>
-
-    companion object {
-        const val BASE_URL = "https://ap1.unwiredlabs.com/"
-    }
 }
