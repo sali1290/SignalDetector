@@ -87,5 +87,4 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:3.14.9")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.3")
 }
