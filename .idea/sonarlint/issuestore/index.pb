@@ -52,3 +52,5 @@ Napp/src/main/java/com/example/signaldetector/view/utility/CellInfoCollector.kt
 Oapp/src/main/java/com/example/signaldetector/model/utility/CellInfoCollector.kt,c\1\c1be250f87bdaf5509df466c5662eb57dbc68096
 {
 Kapp/src/main/java/com/example/signaldetector/model/utility/NetworkHelper.kt,b\2\b2509e23d2ca23407dc11f332a5618072607d90b
+u
+Eapp/src/main/java/com/example/signaldetector/view/utility/Resource.kt,b\7\b7fb309e800f1b4b53047edf5f3a5d5be39f19a1
