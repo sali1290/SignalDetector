@@ -93,7 +93,7 @@ fun MainScreen() {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        SimSlotItem(iconId = R.drawable.ic_mtn_irancell, )
+//        SimSlotItem(iconId = R.drawable.ic_mtn_irancell, )
     }
 }
 

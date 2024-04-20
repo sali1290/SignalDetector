@@ -58,33 +58,44 @@ android {
     }
 }
 dependencies {
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
+    val coreVersion = "1.12.0"
+    val lifecycleVersion = "2.7.0"
+    val activityComposeVersion = "1.8.2"
+    val junitVersion = "4.13.2"
+    implementation("androidx.core:core-ktx:$coreVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    implementation("androidx.activity:activity-compose:$activityComposeVersion")
+    implementation(platform("androidx.compose:compose-bom:2024.04.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    testImplementation("junit:junit:4.13.2")
+    testImplementation("junit:junit:$junitVersion")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.04.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
 // Di with Koin
 dependencies {
-    implementation("io.insert-koin:koin-android:3.2.3")
-    implementation("io.insert-koin:koin-androidx-compose:3.2.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    val koinVersion = "3.2.3"
+    val koinComposeVersion = "3.2.3"
+    val lifecycleViewModeVersion = "3.2.3"
+    implementation("io.insert-koin:koin-android:$koinVersion")
+    implementation("io.insert-koin:koin-androidx-compose:$koinComposeVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleViewModeVersion")
 }
 // Remote datasource
 dependencies {
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
-    implementation("com.squareup.okhttp3:okhttp:3.14.9")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    val retrofitVersion = "2.9.0"
+    val moshiVersion = "1.14.0"
+    val okhttpVersion = "3.14.9"
+    val lifecycleExtensionVersion = "2.2.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
+    implementation("com.squareup.okhttp3:okhttp:$okhttpVersion")
+    implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
+    implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionVersion")
 }
