@@ -38,3 +38,9 @@ Gapp/src/main/java/com/example/signaldetector/view/screens/MainScreen.kt,c\f\cf
 Papp/src/main/java/com/example/signaldetector/view/utility/SignalPowerDetector.kt,7\7\779ca7c2498117875ceccc97e3a14202f0cf86cb
 t
 Dapp/src/main/java/com/example/signaldetector/view/utility/LogKeys.kt,d\c\dc522ae27acde47be8b83373e3d00bf02c334a6f
+{
+Kapp/src/main/java/com/example/signaldetector/view/components/SimSlotItem.kt,b\e\be9fd4f49c97dbf6a84aecbca5097708e94c7f7d
+y
+Iapp/src/main/java/com/example/signaldetector/view/utility/SignalStatus.kt,6\e\6ef2f0faaf9a7d9c06bf47e1c6bf67d2541a828d
+X
+(gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
