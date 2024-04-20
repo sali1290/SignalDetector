@@ -81,8 +81,8 @@ dependencies {
 // Di with Koin
 dependencies {
     val koinVersion = "3.2.3"
-    val koinComposeVersion = "3.2.3"
-    val lifecycleViewModeVersion = "3.2.3"
+    val koinComposeVersion = "3.2.2"
+    val lifecycleViewModeVersion = "2.7.0"
     implementation("io.insert-koin:koin-android:$koinVersion")
     implementation("io.insert-koin:koin-androidx-compose:$koinComposeVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleViewModeVersion")
