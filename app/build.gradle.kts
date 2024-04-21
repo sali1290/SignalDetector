@@ -3,6 +3,8 @@ import java.util.Properties
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.dagger.hilt.android")
+    id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
 }
 
@@ -78,14 +80,14 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
-// Di with Koin
+// Di with Hilt
 dependencies {
-    val koinVersion = "3.2.3"
-    val koinComposeVersion = "3.2.2"
-    val lifecycleViewModeVersion = "2.7.0"
-    implementation("io.insert-koin:koin-android:$koinVersion")
-    implementation("io.insert-koin:koin-androidx-compose:$koinComposeVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleViewModeVersion")
+    val hiltVersion = "2.49"
+    val hiltNavigationVersion = "1.2.0"
+    // Di with Hilt
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    implementation("androidx.hilt:hilt-navigation-compose:$hiltNavigationVersion")
+    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
 }
 // Remote datasource
 dependencies {

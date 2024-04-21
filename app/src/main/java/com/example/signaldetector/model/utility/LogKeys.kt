@@ -1,4 +1,4 @@
-package com.example.signaldetector.view.utility
+package com.example.signaldetector.model.utility
 
 object LogKeys {
     const val ResultTest = "Result-Test"
