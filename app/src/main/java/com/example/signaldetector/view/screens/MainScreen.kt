@@ -20,11 +20,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.signaldetector.R
+import com.example.signaldetector.view.theme.Typography
 
 @Composable
 fun MainScreen() {
@@ -42,8 +41,7 @@ fun MainScreen() {
 
         Text(
             text = stringResource(id = R.string.app_name),
-            fontSize = 24.sp,
-            fontStyle = FontStyle.Italic
+            style = Typography.titleLarge
         )
 
         LazyVerticalGrid(
@@ -91,7 +89,7 @@ fun MainItems(title: String, icon: Int) {
                     .height(75.dp)
             )
             Spacer(modifier = Modifier.height(15.dp))
-            Text(text = title, fontSize = 20.sp)
+            Text(text = title, style = Typography.bodyLarge)
         }
     }
 

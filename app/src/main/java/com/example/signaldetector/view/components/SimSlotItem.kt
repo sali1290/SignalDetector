@@ -17,10 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.signaldetector.R
-import com.example.signaldetector.view.theme.Purple40
+import com.example.signaldetector.view.theme.AccentColor
 
 @Composable
 fun SimSlotItem(
@@ -33,7 +34,7 @@ fun SimSlotItem(
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp)
-            .border(width = 1.dp, shape = RoundedCornerShape(15.dp), color = Purple40)
+            .border(width = 1.dp, shape = RoundedCornerShape(15.dp), color = AccentColor)
             .padding(10.dp)
     ) {
         Image(
@@ -89,4 +90,10 @@ fun SimSlotItem(
     }
 
 
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SimSlotPreview() {
+    SimSlotItem(iconId = R.drawable.ic_sim, signalStrength = "20")
 }
