@@ -28,10 +28,6 @@ Uapp/src/main/java/com/example/signaldetector/viewmodel/LocationByCellInfoViewMo
 Mapp/src/main/java/com/example/signaldetector/application/SignalDetectorApp.kt,4\0\407e027e1c4da3c582b77ea1a03c8821bfb9bb27
 {
 Kapp/src/main/java/com/example/signaldetector/model/utility/NetworkHelper.kt,b\2\b2509e23d2ca23407dc11f332a5618072607d90b
-u
-Eapp/src/main/java/com/example/signaldetector/view/utility/Resource.kt,b\7\b7fb309e800f1b4b53047edf5f3a5d5be39f19a1
-ˆ
-Xapp/src/main/java/com/example/signaldetector/view/components/CollectViewModelResponse.kt,3\d\3db0c5c986b379a176d8635361c32c516f38f99b
 w
 Gapp/src/main/java/com/example/signaldetector/view/screens/MainScreen.kt,c\f\cf3f4fc46a1bb974fbe6256222bf9d53040a4bdb
 €
@@ -44,3 +40,5 @@ y
 Iapp/src/main/java/com/example/signaldetector/view/utility/SignalStatus.kt,6\e\6ef2f0faaf9a7d9c06bf47e1c6bf67d2541a828d
 X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
+z
+Japp/src/main/java/com/example/signaldetector/view/utility/ViewModelImpl.kt,9\6\962bade2d8fbed3cac3118330b5d380bc53a5948
