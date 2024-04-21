@@ -4,6 +4,6 @@ import android.telephony.SubscriptionInfo
 
 interface SIMCardRepo {
 
-    fun getSIMCardsStrength(): List<Pair<SubscriptionInfo, Int>>
+    fun getSIMCardsStrength(): List<Pair<Int, SubscriptionInfo>>
 
 }

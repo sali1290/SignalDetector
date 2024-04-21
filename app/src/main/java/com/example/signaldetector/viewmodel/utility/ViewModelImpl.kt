@@ -1,4 +1,4 @@
-package com.example.signaldetector.view.utility
+package com.example.signaldetector.viewmodel.utility
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

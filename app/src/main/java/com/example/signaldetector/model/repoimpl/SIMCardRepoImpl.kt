@@ -18,12 +18,13 @@ import com.example.signaldetector.model.utility.LogKeys
 import com.example.signaldetector.model.utility.getRegisteredCellInfo
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.IOException
+import javax.inject.Inject
 
-class SIMCardRepoImpl(
+class SIMCardRepoImpl @Inject constructor(
     @ApplicationContext private val context: Context
 ) : SIMCardRepo {
 
-    override fun getSIMCardsStrength(): List<Pair<SubscriptionInfo, Int>> {
+    override fun getSIMCardsStrength(): List<Pair<Int, SubscriptionInfo>> {
         var strength1 = -1
         var strength2 = -1
 
@@ -140,7 +141,7 @@ class SIMCardRepoImpl(
 
         Log.i("Result-Test", "final strength  sim1 $strength1  sim2 $strength2")
 
-        return listOf(Pair(sub1!!, strength1), Pair(sub2!!, strength2))
+        return listOf(Pair(strength1, sub1!!), Pair(strength2, sub2!!))
     }
 
 }
