@@ -1,6 +1,7 @@
 package com.example.signaldetector.view.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,11 +23,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.signaldetector.R
 import com.example.signaldetector.view.theme.Typography
 
 @Composable
-fun MainScreen() {
+fun MainScreen(navController: NavController) {
 
     val mainScreenItems =
         listOf(
@@ -50,8 +53,13 @@ fun MainScreen() {
                 .fillMaxSize()
                 .padding(10.dp),
         ) {
-            itemsIndexed(mainScreenItems) { _, item ->
-                MainItems(title = item.title, icon = item.icon)
+            itemsIndexed(mainScreenItems) { index, item ->
+                MainItems(title = item.title, icon = item.icon) {
+                    when (index) {
+                        0 -> navController.navigate(Screen.SIMInfoScreen.route)
+                        1 -> navController.navigate(Screen.IPInfoScreen.route)
+                    }
+                }
             }
         }
     }
@@ -62,16 +70,17 @@ fun MainScreen() {
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview() {
-    MainScreen()
+    MainScreen(rememberNavController())
 }
 
 @Composable
-fun MainItems(title: String, icon: Int) {
+fun MainItems(title: String, icon: Int, onItemClickListener: () -> Unit) {
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(5.dp),
+            .padding(5.dp)
+            .clickable { onItemClickListener.invoke() },
         elevation = CardDefaults.cardElevation(15.dp),
         shape = RoundedCornerShape(5.dp),
     ) {

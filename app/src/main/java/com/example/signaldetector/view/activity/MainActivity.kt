@@ -7,7 +7,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.signaldetector.view.screens.IPInfoScreen
 import com.example.signaldetector.view.screens.MainScreen
+import com.example.signaldetector.view.screens.SIMInfoScreen
+import com.example.signaldetector.view.screens.Screen
 import com.example.signaldetector.view.theme.SignalDetectorTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +28,21 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen()
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.MainScreen.route
+                    ) {
+                        composable(route = Screen.MainScreen.route) {
+                            MainScreen(navController)
+                        }
+                        composable(route = Screen.SIMInfoScreen.route) {
+                            SIMInfoScreen()
+                        }
+                        composable(route = Screen.IPInfoScreen.route) {
+                            IPInfoScreen()
+                        }
+                    }
                 }
             }
         }
