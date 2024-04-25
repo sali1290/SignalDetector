@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -24,69 +25,40 @@ import com.example.signaldetector.R
 import com.example.signaldetector.view.theme.AccentColor
 
 @Composable
-fun SimSlotItem(
-    iconId: Int,
-    signalStrength: String,
-
-    ) {
+fun SimSlotItem(providerName: String) {
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp)
             .border(width = 1.dp, shape = RoundedCornerShape(15.dp), color = AccentColor)
-            .padding(10.dp)
+            .padding(10.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            painter = painterResource(id = iconId),
+            painter = painterResource(id = if (providerName == "Irancel") R.drawable.ic_mtn_irancell else R.drawable.ic_ip),
             contentDescription = "Carrier logo",
         )
 
-        Spacer(modifier = Modifier.width(5.dp))
+        Spacer(modifier = Modifier.width(10.dp))
 
-        Column {
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "Signal strength:",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp
-                )
-
-                Spacer(modifier = Modifier.height(5.dp))
-
-                Text(
-                    text = "$signalStrength dBm",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    color = Color.Gray
-                )
-            }
-
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "Status:",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp
-                )
-                Spacer(modifier = Modifier.height(5.dp))
-                Text(
-                    text = "Good",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    color = Color.Green
-                )
-            }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "Provider:",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            )
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(
+                text = providerName,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Color.Green
+            )
         }
-
     }
 
 
@@ -95,5 +67,5 @@ fun SimSlotItem(
 @Preview(showBackground = true)
 @Composable
 fun SimSlotPreview() {
-    SimSlotItem(iconId = R.drawable.ic_sim, signalStrength = "20")
+    SimSlotItem(providerName = "Irancel")
 }

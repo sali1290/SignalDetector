@@ -16,7 +16,7 @@ class SIMCardViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _simCardsInfo =
-        MutableStateFlow(ResultState<List<Pair<Int, SubscriptionInfo>>>(result = emptyList()))
+        MutableStateFlow(ResultState<List<Pair<Int, SubscriptionInfo?>>>(result = emptyList()))
     val simCardsInfo = _simCardsInfo.asStateFlow()
     fun getSIMCardsInformation() = updateInBackground(flow = _simCardsInfo) {
         simCardRepo.getSIMCardsStrength()

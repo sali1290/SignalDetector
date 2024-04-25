@@ -20,11 +20,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.IOException
 import javax.inject.Inject
 
-class SIMCardRepoImpl @Inject constructor(
-    @ApplicationContext private val context: Context
-) : SIMCardRepo {
+class SIMCardRepoImpl @Inject constructor(@ApplicationContext private val context: Context) :
+    SIMCardRepo {
 
-    override fun getSIMCardsStrength(): List<Pair<Int, SubscriptionInfo>> {
+    override fun getSIMCardsStrength(): List<Pair<Int, SubscriptionInfo?>> {
         var strength1 = -1
         var strength2 = -1
 
@@ -37,7 +36,6 @@ class SIMCardRepoImpl @Inject constructor(
         val telephonyManager =
             context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 
-
         if (ActivityCompat.checkSelfPermission(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -45,73 +43,17 @@ class SIMCardRepoImpl @Inject constructor(
         ) {
             throw IOException("Permission denied")
         }
+
         if (telephonyManager.allCellInfo != null) {
-
-
             val allCellinfo = telephonyManager.allCellInfo
             val activeSubscriptionInfoList = manager.activeSubscriptionInfoList
-
             val regCellInfo = getRegisteredCellInfo(allCellinfo)
 
             activeSubscriptionInfoList.forEachIndexed { _, subs ->
 
-                if (activeSubscriptionInfoList.size >= 2) {
-
-                    if (regCellInfo.size >= 2) {
-
-                        if (subs.simSlotIndex == 0) {
-
-                            if (subs.carrierName != context.getString(R.string.no_service)) {
-
-
-                                strength1 = when (val info1 = regCellInfo[0]) {
-                                    is CellInfoLte -> info1.cellSignalStrength.dbm
-                                    is CellInfoGsm -> info1.cellSignalStrength.dbm
-                                    is CellInfoCdma -> info1.cellSignalStrength.dbm
-                                    is CellInfoWcdma -> info1.cellSignalStrength.dbm
-                                    else -> 0
-                                }
-
-                                Log.i(LogKeys.ResultTest, "subs $subs")
-                                sub1 = subs
-                                Log.i(
-                                    LogKeys.ResultTest,
-                                    "sim1   ${subs.carrierName}  $strength1"
-                                )
-                            } else {
-
-                                strength1 = -1
-                            }
-
-                        } else if (subs.simSlotIndex == 1) {
-
-                            if (subs.carrierName != "No service") {
-
-                                strength2 = when (val info2 = regCellInfo[1]) {
-                                    is CellInfoLte -> info2.cellSignalStrength.dbm
-                                    is CellInfoGsm -> info2.cellSignalStrength.dbm
-                                    is CellInfoCdma -> info2.cellSignalStrength.dbm
-                                    is CellInfoWcdma -> info2.cellSignalStrength.dbm
-                                    else -> 0
-                                }
-                                Log.i(LogKeys.ResultTest, "subs $subs")
-                                sub2 = subs
-                                Log.i(LogKeys.ResultTest, "sim2   ${subs.carrierName}  $strength2")
-                            } else {
-
-                                strength2 = -1
-                            }
-
-                        }
-
-                    }
-                } else if (activeSubscriptionInfoList.size == 1) {
-
+                if (activeSubscriptionInfoList.size == 1) {
                     if (regCellInfo.size >= 1 && subs.simSlotIndex == 0) {
-
                         if (subs.carrierName != "No service") {
-
-
                             strength1 = when (val info1 = regCellInfo[0]) {
                                 is CellInfoLte -> info1.cellSignalStrength.level
                                 is CellInfoGsm -> info1.cellSignalStrength.level
@@ -127,21 +69,55 @@ class SIMCardRepoImpl @Inject constructor(
                                 "sim1   ${subs.carrierName}  ${subs.mnc}  $strength1"
                             )
                         } else {
-
                             strength1 = -1
                         }
                     }
 
                     strength2 = -2
+                }
 
+                if (activeSubscriptionInfoList.size >= 2 && regCellInfo.size >= 2) {
+                    if (subs.simSlotIndex == 0) {
+                        if (subs.carrierName != context.getString(R.string.no_service)) {
+                            strength1 = when (val info1 = regCellInfo[0]) {
+                                is CellInfoLte -> info1.cellSignalStrength.dbm
+                                is CellInfoGsm -> info1.cellSignalStrength.dbm
+                                is CellInfoCdma -> info1.cellSignalStrength.dbm
+                                is CellInfoWcdma -> info1.cellSignalStrength.dbm
+                                else -> 0
+                            }
+                            Log.i(LogKeys.ResultTest, "subs $subs")
+                            sub1 = subs
+                            Log.i(
+                                LogKeys.ResultTest,
+                                "sim1   ${subs.carrierName}  $strength1"
+                            )
+                        } else {
+                            strength1 = -1
+                        }
+                    }
+                    if (subs.simSlotIndex == 1) {
+                        if (subs.carrierName != "No service") {
+                            strength2 = when (val info2 = regCellInfo[1]) {
+                                is CellInfoLte -> info2.cellSignalStrength.dbm
+                                is CellInfoGsm -> info2.cellSignalStrength.dbm
+                                is CellInfoCdma -> info2.cellSignalStrength.dbm
+                                is CellInfoWcdma -> info2.cellSignalStrength.dbm
+                                else -> 0
+                            }
+                            Log.i(LogKeys.ResultTest, "subs $subs")
+                            sub2 = subs
+                            Log.i(LogKeys.ResultTest, "sim2   ${subs.carrierName}  $strength2")
+                        } else {
+                            strength2 = -1
+                        }
+                    }
                 }
             }
-
         }
 
         Log.i("Result-Test", "final strength  sim1 $strength1  sim2 $strength2")
 
-        return listOf(Pair(strength1, sub1!!), Pair(strength2, sub2!!))
+        return listOf(Pair(strength1, sub1), Pair(strength2, sub2))
     }
-
 }
