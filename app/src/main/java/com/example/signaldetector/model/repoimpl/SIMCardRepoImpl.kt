@@ -3,6 +3,7 @@ package com.example.signaldetector.model.repoimpl
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.telephony.CellInfo
 import android.telephony.CellInfoCdma
 import android.telephony.CellInfoGsm
 import android.telephony.CellInfoLte
@@ -15,7 +16,6 @@ import androidx.core.app.ActivityCompat
 import com.example.signaldetector.R
 import com.example.signaldetector.model.repo.SIMCardRepo
 import com.example.signaldetector.model.utility.LogKeys
-import com.example.signaldetector.model.utility.getRegisteredCellInfo
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.IOException
 import javax.inject.Inject
@@ -119,5 +119,17 @@ class SIMCardRepoImpl @Inject constructor(@ApplicationContext private val contex
         Log.i("Result-Test", "final strength  sim1 $strength1  sim2 $strength2")
 
         return listOf(Pair(strength1, sub1), Pair(strength2, sub2))
+    }
+
+    private fun getRegisteredCellInfo(cellInfoList: List<CellInfo>): ArrayList<CellInfo> {
+        val registeredCellInfo = ArrayList<CellInfo>()
+        if (cellInfoList.isNotEmpty()) {
+            for (i in cellInfoList.indices) {
+                if (cellInfoList[i].isRegistered) {
+                    registeredCellInfo.add(cellInfoList[i])
+                }
+            }
+        }
+        return registeredCellInfo
     }
 }
