@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.blongho.country_data.World
 import com.example.signaldetector.view.screens.IPInfoScreen
 import com.example.signaldetector.view.screens.MainScreen
 import com.example.signaldetector.view.screens.SIMInfoScreen
@@ -21,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        World.init(applicationContext)
         setContent {
             SignalDetectorTheme {
                 // A surface container using the 'background' color from the theme

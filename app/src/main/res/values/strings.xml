@@ -3,4 +3,9 @@
     <string name="no_service">No service</string>
     <string name="sim_cards">SIM Cards</string>
     <string name="ip">IP</string>
+    <string name="provider">Provider:</string>
+    <string name="status">"Status:"</string>
+    <string name="power">Power:</string>
+    <string name="flag">Flag</string>
+    <string name="country">Country:</string>
 </resources>
