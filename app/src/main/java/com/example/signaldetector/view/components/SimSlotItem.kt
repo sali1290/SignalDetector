@@ -26,6 +26,8 @@ import androidx.compose.ui.unit.sp
 import com.blongho.country_data.World
 import com.example.signaldetector.R
 import com.example.signaldetector.view.theme.AccentColor
+import com.example.signaldetector.view.utility.SignalStatus
+import com.example.signaldetector.view.utility.measureSignalPower
 
 @Composable
 fun SimSlotItem(slot: Int, providerName: String, power: Int, iconColor: Int, country: String) {
@@ -100,10 +102,10 @@ fun SimSlotItem(slot: Int, providerName: String, power: Int, iconColor: Int, cou
                     )
                     Spacer(modifier = Modifier.height(5.dp))
                     Text(
-                        text = providerName,
+                        text = measureSignalPower(power).first,
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp,
-                        color = Color.Green
+                        color = measureSignalPower(power).second
                     )
                 }
                 Row(
