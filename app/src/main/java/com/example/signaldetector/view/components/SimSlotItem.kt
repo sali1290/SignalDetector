@@ -2,6 +2,7 @@ package com.example.signaldetector.view.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +13,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,11 +30,17 @@ import androidx.compose.ui.unit.sp
 import com.blongho.country_data.World
 import com.example.signaldetector.R
 import com.example.signaldetector.view.theme.AccentColor
-import com.example.signaldetector.view.utility.SignalStatus
 import com.example.signaldetector.view.utility.measureSignalPower
 
 @Composable
-fun SimSlotItem(slot: Int, providerName: String, power: Int, iconColor: Int, country: String) {
+fun SimSlotItem(
+    slot: Int,
+    providerName: String,
+    power: Int,
+    iconColor: Int,
+    country: String,
+    showStatusDialog: () -> Unit
+) {
 
     Column(
         modifier = Modifier
@@ -44,15 +54,11 @@ fun SimSlotItem(slot: Int, providerName: String, power: Int, iconColor: Int, cou
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Slot",
+                text = stringResource(R.string.slot),
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp
             )
-            Text(
-                text = (slot + 1).toString(),
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp
-            )
+            Text(text = (slot + 1).toString())
         }
         Spacer(modifier = Modifier.height(10.dp))
         Row(
@@ -83,11 +89,8 @@ fun SimSlotItem(slot: Int, providerName: String, power: Int, iconColor: Int, cou
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp
                     )
-                    Spacer(modifier = Modifier.height(5.dp))
                     Text(
                         text = providerName,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp,
                         color = Color(iconColor)
                     )
                 }
@@ -98,15 +101,20 @@ fun SimSlotItem(slot: Int, providerName: String, power: Int, iconColor: Int, cou
                     Text(
                         text = stringResource(R.string.status),
                         fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp
                     )
-                    Spacer(modifier = Modifier.height(5.dp))
-                    Text(
-                        text = measureSignalPower(power).first,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp,
-                        color = measureSignalPower(power).second
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.clickable { showStatusDialog.invoke() }
+                    ) {
+                        Text(
+                            text = measureSignalPower(power).first,
+                            color = measureSignalPower(power).second
+                        )
+                        Icon(
+                            imageVector = Icons.Default.Info,
+                            contentDescription = "Information"
+                        )
+                    }
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -114,15 +122,9 @@ fun SimSlotItem(slot: Int, providerName: String, power: Int, iconColor: Int, cou
                 ) {
                     Text(
                         text = stringResource(R.string.power),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp
+                        fontWeight = FontWeight.Bold
                     )
-                    Spacer(modifier = Modifier.height(5.dp))
-                    Text(
-                        text = power.toString() + "dBm",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp
-                    )
+                    Text(text = power.toString() + stringResource(R.string.dbm))
                 }
             }
         }
@@ -136,7 +138,6 @@ fun SimSlotItem(slot: Int, providerName: String, power: Int, iconColor: Int, cou
             Text(
                 text = stringResource(R.string.country),
                 fontWeight = FontWeight.Bold,
-                fontSize = 18.sp
             )
             Image(
                 painter = painterResource(id = World.getFlagOf(country)),
@@ -153,5 +154,5 @@ fun SimSlotItem(slot: Int, providerName: String, power: Int, iconColor: Int, cou
 @Preview(showBackground = true)
 @Composable
 fun SimSlotPreview() {
-    SimSlotItem(slot = 0, providerName = "Irancell", power = 0, iconColor = -16746133, "ir")
+    SimSlotItem(slot = 0, providerName = "Irancell", power = 0, iconColor = -16746133, "ir", {})
 }

@@ -8,4 +8,11 @@
     <string name="power">Power:</string>
     <string name="flag">Flag</string>
     <string name="country">Country:</string>
+    <string name="slot">Slot</string>
+    <string name="dbm">dBm</string>
+    <string name="perfect">Perfect</string>
+    <string name="good">Good</string>
+    <string name="average">Average</string>
+    <string name="poor">Poor</string>
+    <string name="very_poor">Very poor</string>
 </resources>

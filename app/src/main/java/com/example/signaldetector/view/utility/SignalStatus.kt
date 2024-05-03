@@ -9,8 +9,6 @@ enum class SignalStatus(val value: String) {
 fun measureSignalPower(signalStrength: Int): Pair<String, Color> {
     return when {
 
-        signalStrength >= -50 -> Pair(SignalStatus.Perfect.value, Color(0xFF89FF00))
-
         signalStrength >= -79 -> Pair(SignalStatus.Perfect.value, Color(0xFF89FF00))
 
         signalStrength >= -89 -> Pair(SignalStatus.Good.value, Color(0xFFA7CF79))
