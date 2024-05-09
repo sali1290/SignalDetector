@@ -3,8 +3,10 @@ package com.example.signaldetector.model.utility
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class NetWorkHelper (private val context: Context) {
+class NetWorkHelper @Inject constructor(@ApplicationContext private val context: Context) {
 
     fun isNetworkConnected(): Boolean {
 
@@ -19,12 +21,15 @@ class NetWorkHelper (private val context: Context) {
             activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
                 true
             }
+
             activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
                 true
             }
+
             activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
                 true
             }
+
             activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> {
                 true
             }

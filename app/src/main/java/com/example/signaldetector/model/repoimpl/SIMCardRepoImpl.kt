@@ -14,14 +14,20 @@ import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.example.signaldetector.R
+import com.example.signaldetector.model.dto.response.CellLocation
 import com.example.signaldetector.model.repo.SIMCardRepo
+import com.example.signaldetector.model.services.UnwiredLabsRemoteApi
 import com.example.signaldetector.model.utility.LogKeys
+import com.example.signaldetector.model.utility.NetWorkHelper
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.IOException
 import javax.inject.Inject
 
-class SIMCardRepoImpl @Inject constructor(@ApplicationContext private val context: Context) :
-    SIMCardRepo {
+class SIMCardRepoImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val unwiredLabsRemoteApi: UnwiredLabsRemoteApi,
+    private val netWorkHelper: NetWorkHelper
+) : SIMCardRepo {
 
     override fun getSIMCardsStrength(): List<Pair<Int, SubscriptionInfo?>> {
         var strength1 = -1
@@ -120,6 +126,22 @@ class SIMCardRepoImpl @Inject constructor(@ApplicationContext private val contex
 
         return listOf(Pair(strength1, sub1), Pair(strength2, sub2))
     }
+
+    override suspend fun getLocation(
+        cellInfo: com.example.signaldetector.model.dto.request.CellInfo
+    ): CellLocation {
+        if (netWorkHelper.isNetworkConnected()) {
+            val response = unwiredLabsRemoteApi.getLocationByCellInfo(cellInfo)
+            if (response.isSuccessful) {
+                return response.body()!!
+            } else {
+                throw IOException(response.message())
+            }
+        } else {
+            throw IOException("Internet is not connected")
+        }
+    }
+
 
     private fun getRegisteredCellInfo(cellInfoList: List<CellInfo>): ArrayList<CellInfo> {
         val registeredCellInfo = ArrayList<CellInfo>()

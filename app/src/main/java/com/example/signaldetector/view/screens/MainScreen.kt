@@ -57,7 +57,7 @@ fun MainScreen(navController: NavController) {
                 MainItems(title = item.title, icon = item.icon) {
                     when (index) {
                         0 -> navController.navigate(Screen.SIMInfoScreen.route)
-                        1 -> navController.navigate(Screen.IPInfoScreen.route)
+                        1 -> navController.navigate(Screen.UserLocationScreen.route)
                     }
                 }
             }
