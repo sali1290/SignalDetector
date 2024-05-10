@@ -29,5 +29,4 @@ class ApiModule {
             .create(UnwiredLabsRemoteApi::class.java)
     }
 
-
 }

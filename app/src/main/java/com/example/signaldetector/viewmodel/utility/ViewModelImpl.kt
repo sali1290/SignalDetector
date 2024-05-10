@@ -31,7 +31,7 @@ fun <T> ViewModel.updateInBackground(
             flow.update { ResultState(result = result) }
         } catch (exception: IOException) {
             val message = exception.message!!
-            Log.d(LogKeys.VIEWMODEL_KEY, "$useCase : $message")
+            Log.d(LogKeys.VIEWMODEL, "$useCase : $message")
             flow.update { it.copy(loading = false, error = message) }
         }
     }

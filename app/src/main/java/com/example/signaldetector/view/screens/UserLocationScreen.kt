@@ -1,6 +1,5 @@
 package com.example.signaldetector.view.screens
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,7 +27,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.signaldetector.R
-import com.example.signaldetector.model.utility.LogKeys
 import com.example.signaldetector.model.utility.getCurrentCellInfo
 import com.example.signaldetector.view.theme.Typography
 import com.example.signaldetector.viewmodel.CellLocationViewModel
@@ -88,7 +86,6 @@ fun UserLocationScreen() {
                         cellService = it
                         expanded = false
                         val allCellInfo = getCurrentCellInfo(context)
-                        Log.d(LogKeys.REQUEST_TEST, "Cell info: $allCellInfo")
                         val cellInfo = when (it) {
                             "lte" -> allCellInfo[0]
                             "gsm" -> allCellInfo[1]

@@ -59,23 +59,16 @@ class SIMCardRepoImpl @Inject constructor(
 
                 if (activeSubscriptionInfoList.size == 1) {
                     if (regCellInfo.size >= 1 && subs.simSlotIndex == 0) {
-                        if (subs.carrierName != "No service") {
-                            strength1 = when (val info1 = regCellInfo[0]) {
+                        strength1 = if (subs.carrierName != "No service") {
+                            when (val info1 = regCellInfo[0]) {
                                 is CellInfoLte -> info1.cellSignalStrength.level
                                 is CellInfoGsm -> info1.cellSignalStrength.level
                                 is CellInfoCdma -> info1.cellSignalStrength.level
                                 is CellInfoWcdma -> info1.cellSignalStrength.level
                                 else -> 0
                             }
-
-                            Log.i(LogKeys.ResultTest, "subs $subs")
-
-                            Log.i(
-                                LogKeys.ResultTest,
-                                "sim1   ${subs.carrierName}  ${subs.mnc}  $strength1"
-                            )
                         } else {
-                            strength1 = -1
+                            -1
                         }
                     }
 
@@ -92,12 +85,7 @@ class SIMCardRepoImpl @Inject constructor(
                                 is CellInfoWcdma -> info1.cellSignalStrength.dbm
                                 else -> 0
                             }
-                            Log.i(LogKeys.ResultTest, "subs $subs")
                             sub1 = subs
-                            Log.i(
-                                LogKeys.ResultTest,
-                                "sim1   ${subs.carrierName}  $strength1"
-                            )
                         } else {
                             strength1 = -1
                         }
@@ -111,9 +99,7 @@ class SIMCardRepoImpl @Inject constructor(
                                 is CellInfoWcdma -> info2.cellSignalStrength.dbm
                                 else -> 0
                             }
-                            Log.i(LogKeys.ResultTest, "subs $subs")
                             sub2 = subs
-                            Log.i(LogKeys.ResultTest, "sim2   ${subs.carrierName}  $strength2")
                         } else {
                             strength2 = -1
                         }
@@ -121,9 +107,7 @@ class SIMCardRepoImpl @Inject constructor(
                 }
             }
         }
-
-        Log.i("Result-Test", "final strength  sim1 $strength1  sim2 $strength2")
-
+        Log.i(LogKeys.REQUEST, "final strength  sim1 $strength1  sim2 $strength2")
         return listOf(Pair(strength1, sub1), Pair(strength2, sub2))
     }
 

@@ -36,10 +36,6 @@ fun SIMInfoScreen() {
             getSIMCardsInformation()
         }
         LaunchedEffect(key1 = simInfo) {
-            Log.d(
-                LogKeys.ResultTest,
-                simInfo.result.toString()
-            )
             if (!simInfo.error.isNullOrEmpty())
                 Toast.makeText(context, simInfo.error, Toast.LENGTH_LONG).show()
         }

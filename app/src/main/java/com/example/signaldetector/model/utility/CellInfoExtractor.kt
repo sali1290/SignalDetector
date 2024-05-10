@@ -8,7 +8,6 @@ import android.telephony.CellInfoGsm
 import android.telephony.CellInfoLte
 import android.telephony.CellInfoWcdma
 import android.telephony.TelephonyManager
-import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.example.signaldetector.model.dto.request.Cell
 import com.example.signaldetector.model.dto.request.CellInfo
@@ -35,6 +34,7 @@ fun getCurrentCellInfo(context: Context): List<CellInfo> {
     }
 }
 
+@Suppress("DEPRECATION")
 private fun getCellInfo(info: CellInfoGsm): CellInfo {
     val cellInfo = CellInfo()
     cellInfo.radio = RadioType.GSM
@@ -52,6 +52,7 @@ private fun getCellInfo(info: CellInfoGsm): CellInfo {
     return cellInfo
 }
 
+@Suppress("DEPRECATION")
 private fun getCellInfo(info: CellInfoWcdma): CellInfo {
     val cellInfo = CellInfo()
 
@@ -70,6 +71,7 @@ private fun getCellInfo(info: CellInfoWcdma): CellInfo {
     return cellInfo
 }
 
+@Suppress("DEPRECATION")
 private fun getCellInfo(info: CellInfoLte): CellInfo {
     val cellInfo = CellInfo()
 
