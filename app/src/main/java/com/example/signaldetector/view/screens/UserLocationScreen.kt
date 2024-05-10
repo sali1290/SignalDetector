@@ -27,7 +27,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.signaldetector.R
-import com.example.signaldetector.model.utility.getCurrentCellInfo
+import com.example.signaldetector.model.utils.getCurrentCellInfo
 import com.example.signaldetector.view.theme.Typography
 import com.example.signaldetector.viewmodel.CellLocationViewModel
 

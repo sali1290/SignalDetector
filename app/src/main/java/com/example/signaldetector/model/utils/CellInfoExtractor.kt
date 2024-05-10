@@ -1,29 +1,16 @@
-package com.example.signaldetector.model.utility
+package com.example.signaldetector.model.utils
 
-import android.Manifest
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Build
 import android.telephony.CellInfoGsm
 import android.telephony.CellInfoLte
 import android.telephony.CellInfoWcdma
-import android.telephony.TelephonyManager
-import androidx.core.app.ActivityCompat
 import com.example.signaldetector.model.dto.request.Cell
 import com.example.signaldetector.model.dto.request.CellInfo
 import com.example.signaldetector.model.dto.request.RadioType
-import java.io.IOException
 
 fun getCurrentCellInfo(context: Context): List<CellInfo> {
-    val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-    val allCellInfo = telephonyManager.allCellInfo
-    if (ActivityCompat.checkSelfPermission(
-            context,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) != PackageManager.PERMISSION_GRANTED
-    ) {
-        throw IOException("Permission denied")
-    }
+    val allCellInfo = getAllCellInfo(context)
     return allCellInfo.mapNotNull {
         when (it) {
             is CellInfoLte -> getCellInfo(it)

@@ -1,6 +1,5 @@
 package com.example.signaldetector.view.screens
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,7 +19,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.signaldetector.model.utility.LogKeys
 import com.example.signaldetector.view.components.PowerInfoDialog
 import com.example.signaldetector.view.components.SimSlotItem
 import com.example.signaldetector.viewmodel.SIMCardViewModel

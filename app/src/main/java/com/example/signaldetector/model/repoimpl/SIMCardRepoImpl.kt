@@ -10,15 +10,15 @@ import android.telephony.CellInfoLte
 import android.telephony.CellInfoWcdma
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
-import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.example.signaldetector.R
 import com.example.signaldetector.model.dto.response.CellLocation
 import com.example.signaldetector.model.repo.SIMCardRepo
 import com.example.signaldetector.model.services.UnwiredLabsRemoteApi
-import com.example.signaldetector.model.utility.LogKeys
-import com.example.signaldetector.model.utility.NetWorkHelper
+import com.example.signaldetector.model.utils.LogKeys
+import com.example.signaldetector.model.utils.NetWorkHelper
+import com.example.signaldetector.model.utils.getAllCellInfo
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.IOException
 import javax.inject.Inject
@@ -30,17 +30,6 @@ class SIMCardRepoImpl @Inject constructor(
 ) : SIMCardRepo {
 
     override fun getSIMCardsStrength(): List<Pair<Int, SubscriptionInfo?>> {
-        var strength1 = -1
-        var strength2 = -1
-
-        var sub1: SubscriptionInfo? = null
-        var sub2: SubscriptionInfo? = null
-
-        val manager =
-            context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE) as SubscriptionManager
-
-        val telephonyManager =
-            context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 
         if (ActivityCompat.checkSelfPermission(
                 context,
@@ -50,59 +39,65 @@ class SIMCardRepoImpl @Inject constructor(
             throw IOException("Permission denied")
         }
 
-        if (telephonyManager.allCellInfo != null) {
-            val allCellinfo = telephonyManager.allCellInfo
-            val activeSubscriptionInfoList = manager.activeSubscriptionInfoList
-            val regCellInfo = getRegisteredCellInfo(allCellinfo)
+        var strength1 = -1
+        var strength2 = -1
 
-            activeSubscriptionInfoList.forEachIndexed { _, subs ->
+        var sub1: SubscriptionInfo? = null
+        var sub2: SubscriptionInfo? = null
 
-                if (activeSubscriptionInfoList.size == 1) {
-                    if (regCellInfo.size >= 1 && subs.simSlotIndex == 0) {
-                        strength1 = if (subs.carrierName != "No service") {
-                            when (val info1 = regCellInfo[0]) {
-                                is CellInfoLte -> info1.cellSignalStrength.level
-                                is CellInfoGsm -> info1.cellSignalStrength.level
-                                is CellInfoCdma -> info1.cellSignalStrength.level
-                                is CellInfoWcdma -> info1.cellSignalStrength.level
-                                else -> 0
-                            }
-                        } else {
-                            -1
+        val manager =
+            context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE) as SubscriptionManager
+
+        val allCellInfo = getAllCellInfo(context)
+        val activeSubscriptionInfoList = manager.activeSubscriptionInfoList
+        val regCellInfo = getRegisteredCellInfo(allCellInfo)
+
+        activeSubscriptionInfoList.forEachIndexed { _, subs ->
+
+            if (activeSubscriptionInfoList.size == 1) {
+                if (regCellInfo.size >= 1 && subs.simSlotIndex == 0) {
+                    strength1 = if (subs.carrierName != context.getString(R.string.no_service)) {
+                        when (val info1 = regCellInfo[0]) {
+                            is CellInfoLte -> info1.cellSignalStrength.level
+                            is CellInfoGsm -> info1.cellSignalStrength.level
+                            is CellInfoCdma -> info1.cellSignalStrength.level
+                            is CellInfoWcdma -> info1.cellSignalStrength.level
+                            else -> 0
                         }
+                    } else {
+                        -1
                     }
-
-                    strength2 = -2
                 }
+                strength2 = -2
+            }
 
-                if (activeSubscriptionInfoList.size >= 2 && regCellInfo.size >= 2) {
-                    if (subs.simSlotIndex == 0) {
-                        if (subs.carrierName != context.getString(R.string.no_service)) {
-                            strength1 = when (val info1 = regCellInfo[0]) {
-                                is CellInfoLte -> info1.cellSignalStrength.dbm
-                                is CellInfoGsm -> info1.cellSignalStrength.dbm
-                                is CellInfoCdma -> info1.cellSignalStrength.dbm
-                                is CellInfoWcdma -> info1.cellSignalStrength.dbm
-                                else -> 0
-                            }
-                            sub1 = subs
-                        } else {
-                            strength1 = -1
+            if (activeSubscriptionInfoList.size == 2 && regCellInfo.size >= 2) {
+                if (subs.simSlotIndex == 0) {
+                    if (subs.carrierName != context.getString(R.string.no_service)) {
+                        strength1 = when (val info1 = regCellInfo[0]) {
+                            is CellInfoLte -> info1.cellSignalStrength.dbm
+                            is CellInfoGsm -> info1.cellSignalStrength.dbm
+                            is CellInfoCdma -> info1.cellSignalStrength.dbm
+                            is CellInfoWcdma -> info1.cellSignalStrength.dbm
+                            else -> 0
                         }
+                        sub1 = subs
+                    } else {
+                        strength1 = -1
                     }
-                    if (subs.simSlotIndex == 1) {
-                        if (subs.carrierName != "No service") {
-                            strength2 = when (val info2 = regCellInfo[1]) {
-                                is CellInfoLte -> info2.cellSignalStrength.dbm
-                                is CellInfoGsm -> info2.cellSignalStrength.dbm
-                                is CellInfoCdma -> info2.cellSignalStrength.dbm
-                                is CellInfoWcdma -> info2.cellSignalStrength.dbm
-                                else -> 0
-                            }
-                            sub2 = subs
-                        } else {
-                            strength2 = -1
+                }
+                if (subs.simSlotIndex == 1) {
+                    if (subs.carrierName != context.getString(R.string.no_service)) {
+                        strength2 = when (val info2 = regCellInfo[1]) {
+                            is CellInfoLte -> info2.cellSignalStrength.dbm
+                            is CellInfoGsm -> info2.cellSignalStrength.dbm
+                            is CellInfoCdma -> info2.cellSignalStrength.dbm
+                            is CellInfoWcdma -> info2.cellSignalStrength.dbm
+                            else -> 0
                         }
+                        sub2 = subs
+                    } else {
+                        strength2 = -1
                     }
                 }
             }
@@ -122,7 +117,7 @@ class SIMCardRepoImpl @Inject constructor(
                 throw IOException(response.message())
             }
         } else {
-            throw IOException("Internet is not connected")
+            throw IOException(context.getString(R.string.internet_is_not_connected))
         }
     }
 

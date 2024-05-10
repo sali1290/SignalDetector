@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.sp
 import com.blongho.country_data.World
 import com.example.signaldetector.R
 import com.example.signaldetector.view.theme.AccentColor
-import com.example.signaldetector.view.utility.measureSignalPower
+import com.example.signaldetector.view.utils.measureSignalPower
 
 @Composable
 fun SimSlotItem(

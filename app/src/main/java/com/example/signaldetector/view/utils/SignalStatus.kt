@@ -1,4 +1,4 @@
-package com.example.signaldetector.view.utility
+package com.example.signaldetector.view.utils
 
 import androidx.compose.ui.graphics.Color
 

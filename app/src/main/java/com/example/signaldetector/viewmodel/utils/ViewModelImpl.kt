@@ -1,9 +1,9 @@
-package com.example.signaldetector.viewmodel.utility
+package com.example.signaldetector.viewmodel.utils
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.signaldetector.model.utility.LogKeys
+import com.example.signaldetector.model.utils.LogKeys
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.example.signaldetector.model.utility
+package com.example.signaldetector.model.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
