@@ -6,8 +6,6 @@ sealed class Screen(val route: String) {
 
     data object SIMInfoScreen : Screen(route = "SIMInfoScreen")
 
-    data object IPInfoScreen : Screen(route = "IPInfoScreen")
-
     data object UserLocationScreen : Screen(route = "UserLocationScreen")
 
 }

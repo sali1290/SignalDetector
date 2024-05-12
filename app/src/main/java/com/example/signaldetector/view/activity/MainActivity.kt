@@ -11,7 +11,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.blongho.country_data.World
-import com.example.signaldetector.view.screens.IPInfoScreen
 import com.example.signaldetector.view.screens.MainScreen
 import com.example.signaldetector.view.screens.SIMInfoScreen
 import com.example.signaldetector.view.screens.Screen
@@ -41,9 +40,6 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(route = Screen.SIMInfoScreen.route) {
                             SIMInfoScreen()
-                        }
-                        composable(route = Screen.IPInfoScreen.route) {
-                            IPInfoScreen()
                         }
                         composable(route = Screen.UserLocationScreen.route) {
                             UserLocationScreen()
