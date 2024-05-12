@@ -13,6 +13,8 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -34,7 +36,7 @@ fun MainScreen(navController: NavController) {
     val mainScreenItems =
         listOf(
             AppFeature(title = stringResource(id = R.string.sim_cards), icon = R.drawable.ic_sim),
-            AppFeature(title = stringResource(id = R.string.ip), icon = R.drawable.ic_ip)
+            AppFeature(title = stringResource(R.string.location), icon = R.drawable.ic_location)
         )
 
     Column(
