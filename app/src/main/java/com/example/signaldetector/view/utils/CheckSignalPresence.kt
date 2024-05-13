@@ -2,7 +2,9 @@ package com.example.signaldetector.view.utils
 
 import android.Manifest
 import android.content.Context
+import android.content.Context.LOCATION_SERVICE
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.telephony.SubscriptionManager
@@ -44,4 +46,9 @@ fun checkCellPresence(context: Context): Boolean {
     val infoSim1 = sManager.getActiveSubscriptionInfoForSimSlotIndex(0)
     val infoSim2 = sManager.getActiveSubscriptionInfoForSimSlotIndex(1)
     return infoSim1 != null || infoSim2 != null
+}
+
+fun checkGpsStatus(context: Context): Boolean {
+    val locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager? ?: return false
+    return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
 }

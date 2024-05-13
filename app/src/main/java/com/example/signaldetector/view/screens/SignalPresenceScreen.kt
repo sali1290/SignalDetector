@@ -32,6 +32,7 @@ import com.example.signaldetector.view.theme.AccentColor
 import com.example.signaldetector.view.theme.SecondaryTextColor
 import com.example.signaldetector.view.theme.Typography
 import com.example.signaldetector.view.utils.checkCellPresence
+import com.example.signaldetector.view.utils.checkGpsStatus
 import com.example.signaldetector.view.utils.checkMobileDataPresence
 import com.example.signaldetector.view.utils.checkWifiPresence
 
@@ -50,11 +51,13 @@ fun SignalPresenceScreen() {
     var isWifiActive by remember { mutableStateOf(false) }
     var isCellActive by remember { mutableStateOf(false) }
     var isMobileDataActive by remember { mutableStateOf(false) }
+    var isGpsActive by remember { mutableStateOf(false) }
     val context = LocalContext.current
     LaunchedEffect(key1 = Unit) {
         isWifiActive = checkWifiPresence(context)
         isCellActive = checkCellPresence(context)
         isMobileDataActive = checkMobileDataPresence(context)
+        isGpsActive = checkGpsStatus(context)
     }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -72,7 +75,7 @@ fun SignalPresenceScreen() {
                     2 -> SignalItem(signal = item, isActive = isMobileDataActive)
                     3 -> SignalItem(signal = item, isActive = false)
                     4 -> SignalItem(signal = item, isActive = false)
-                    5 -> SignalItem(signal = item, isActive = false)
+                    5 -> SignalItem(signal = item, isActive = isGpsActive)
                 }
             }
         }
@@ -86,6 +89,9 @@ fun SignalPresenceScreen() {
                 isWifiActive = checkWifiPresence(context)
                 isCellActive = checkCellPresence(context)
                 isMobileDataActive = checkMobileDataPresence(context)
+
+
+                isGpsActive = checkGpsStatus(context)
             })
     }
 }
