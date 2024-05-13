@@ -34,7 +34,8 @@ fun MainScreen(navController: NavController) {
     val mainScreenItems =
         listOf(
             AppFeature(title = stringResource(id = R.string.sim_cards), icon = R.drawable.ic_sim),
-            AppFeature(title = stringResource(R.string.location), icon = R.drawable.ic_location)
+            AppFeature(title = stringResource(R.string.location), icon = R.drawable.ic_location),
+            AppFeature(title = stringResource(R.string.signal_presence), icon = R.drawable.ic_cell),
         )
 
     Column(
@@ -58,6 +59,7 @@ fun MainScreen(navController: NavController) {
                     when (index) {
                         0 -> navController.navigate(Screen.SIMInfoScreen.route)
                         1 -> navController.navigate(Screen.UserLocationScreen.route)
+                        2 -> navController.navigate(Screen.SignalPresenceScreen.route)
                     }
                 }
             }

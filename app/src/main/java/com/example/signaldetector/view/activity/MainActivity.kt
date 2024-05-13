@@ -14,6 +14,7 @@ import com.blongho.country_data.World
 import com.example.signaldetector.view.screens.MainScreen
 import com.example.signaldetector.view.screens.SIMInfoScreen
 import com.example.signaldetector.view.screens.Screen
+import com.example.signaldetector.view.screens.SignalPresenceScreen
 import com.example.signaldetector.view.screens.UserLocationScreen
 import com.example.signaldetector.view.theme.SignalDetectorTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +44,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(route = Screen.UserLocationScreen.route) {
                             UserLocationScreen()
+                        }
+                        composable(route = Screen.SignalPresenceScreen.route) {
+                            SignalPresenceScreen()
                         }
                     }
                 }

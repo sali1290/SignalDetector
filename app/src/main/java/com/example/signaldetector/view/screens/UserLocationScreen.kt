@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,14 +16,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -43,10 +39,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.signaldetector.R
 import com.example.signaldetector.model.utils.getCurrentCellInfo
+import com.example.signaldetector.view.components.CustomButton
 import com.example.signaldetector.view.theme.AccentColor
 import com.example.signaldetector.view.theme.Typography
 import com.example.signaldetector.viewmodel.CellLocationViewModel
-
 
 @Composable
 fun UserLocationScreen() {
@@ -137,29 +133,10 @@ fun UserLocationScreen() {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-                .clickable {
-                    openMapApp(context, latitude, longitude)
-                },
-            elevation = CardDefaults.cardElevation(10.dp),
-            shape = RoundedCornerShape(corner = CornerSize(10.dp))
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(color = AccentColor),
-                contentAlignment = Alignment.Center
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "Open map")
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Icon(imageVector = Icons.Default.LocationOn, contentDescription = "Map")
-                }
-            }
-        }
+        CustomButton(
+            text = "Open map",
+            backgroundColor = AccentColor,
+            onClick = { openMapApp(context, latitude, longitude) })
     }
 
     LaunchedEffect(key1 = cellLocationState.error) {

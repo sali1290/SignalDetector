@@ -17,4 +17,11 @@
     <string name="very_poor">Very poor</string>
     <string name="internet_is_not_connected">Internet is not connected</string>
     <string name="location">Location</string>
+    <string name="wifi">WIFI</string>
+    <string name="cell">Cell</string>
+    <string name="mobile_data">Mobile Data</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="nfc">NFC</string>
+    <string name="gps">GPS</string>
+    <string name="signal_presence">Signal presence</string>
 </resources>
