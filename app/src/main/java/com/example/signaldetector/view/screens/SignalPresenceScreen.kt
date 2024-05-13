@@ -3,7 +3,6 @@ package com.example.signaldetector.view.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,8 +13,14 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -24,8 +29,11 @@ import androidx.compose.ui.unit.dp
 import com.example.signaldetector.R
 import com.example.signaldetector.view.components.CustomButton
 import com.example.signaldetector.view.theme.AccentColor
+import com.example.signaldetector.view.theme.SecondaryTextColor
 import com.example.signaldetector.view.theme.Typography
-
+import com.example.signaldetector.view.utils.checkCellPresence
+import com.example.signaldetector.view.utils.checkMobileDataPresence
+import com.example.signaldetector.view.utils.checkWifiPresence
 
 @Composable
 fun SignalPresenceScreen() {
@@ -39,6 +47,16 @@ fun SignalPresenceScreen() {
         Signal(stringResource(R.string.gps), R.drawable.ic_gps),
     )
 
+    var isWifiActive by remember { mutableStateOf(false) }
+    var isCellActive by remember { mutableStateOf(false) }
+    var isMobileDataActive by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    LaunchedEffect(key1 = Unit) {
+        isWifiActive = checkWifiPresence(context)
+        isCellActive = checkCellPresence(context)
+        isMobileDataActive = checkMobileDataPresence(context)
+    }
+
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = "Your phone current signals",
@@ -46,12 +64,16 @@ fun SignalPresenceScreen() {
             style = Typography.titleLarge
         )
         Spacer(modifier = Modifier.height(10.dp))
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(3),
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            itemsIndexed(signalItems) { _, item ->
-                SignalItem(signal = item)
+        LazyVerticalGrid(columns = GridCells.Fixed(3)) {
+            itemsIndexed(signalItems) { index, item ->
+                when (index) {
+                    0 -> SignalItem(signal = item, isActive = isWifiActive)
+                    1 -> SignalItem(signal = item, isActive = isCellActive)
+                    2 -> SignalItem(signal = item, isActive = isMobileDataActive)
+                    3 -> SignalItem(signal = item, isActive = false)
+                    4 -> SignalItem(signal = item, isActive = false)
+                    5 -> SignalItem(signal = item, isActive = false)
+                }
             }
         }
 
@@ -60,12 +82,16 @@ fun SignalPresenceScreen() {
         CustomButton(
             text = "Calculate signal presence",
             backgroundColor = AccentColor,
-            onClick = { })
+            onClick = {
+                isWifiActive = checkWifiPresence(context)
+                isCellActive = checkCellPresence(context)
+                isMobileDataActive = checkMobileDataPresence(context)
+            })
     }
 }
 
 @Composable
-private fun SignalItem(signal: Signal) {
+private fun SignalItem(signal: Signal, isActive: Boolean) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -83,12 +109,14 @@ private fun SignalItem(signal: Signal) {
                 painter = painterResource(id = signal.icon),
                 contentDescription = "Icon",
                 modifier = Modifier.height(45.dp),
+                tint = if (isActive) AccentColor else SecondaryTextColor
             )
             Text(
                 text = signal.name,
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
-                style = Typography.bodyLarge
+                style = Typography.bodyLarge,
+                color = if (isActive) AccentColor else SecondaryTextColor
             )
         }
     }
