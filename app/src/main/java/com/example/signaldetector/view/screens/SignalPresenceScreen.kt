@@ -31,9 +31,11 @@ import com.example.signaldetector.view.components.CustomButton
 import com.example.signaldetector.view.theme.AccentColor
 import com.example.signaldetector.view.theme.SecondaryTextColor
 import com.example.signaldetector.view.theme.Typography
+import com.example.signaldetector.view.utils.checkBluetoothSignalPresence
 import com.example.signaldetector.view.utils.checkCellPresence
-import com.example.signaldetector.view.utils.checkGpsStatus
+import com.example.signaldetector.view.utils.checkGpsSignalPresence
 import com.example.signaldetector.view.utils.checkMobileDataPresence
+import com.example.signaldetector.view.utils.checkNfcSignalPresence
 import com.example.signaldetector.view.utils.checkWifiPresence
 
 @Composable
@@ -51,13 +53,17 @@ fun SignalPresenceScreen() {
     var isWifiActive by remember { mutableStateOf(false) }
     var isCellActive by remember { mutableStateOf(false) }
     var isMobileDataActive by remember { mutableStateOf(false) }
+    var isBluetoothActive by remember { mutableStateOf(false) }
+    var isNfcActive by remember { mutableStateOf(false) }
     var isGpsActive by remember { mutableStateOf(false) }
     val context = LocalContext.current
     LaunchedEffect(key1 = Unit) {
         isWifiActive = checkWifiPresence(context)
         isCellActive = checkCellPresence(context)
         isMobileDataActive = checkMobileDataPresence(context)
-        isGpsActive = checkGpsStatus(context)
+        isBluetoothActive = checkBluetoothSignalPresence(context)
+        isNfcActive = checkNfcSignalPresence(context)
+        isGpsActive = checkGpsSignalPresence(context)
     }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -73,8 +79,8 @@ fun SignalPresenceScreen() {
                     0 -> SignalItem(signal = item, isActive = isWifiActive)
                     1 -> SignalItem(signal = item, isActive = isCellActive)
                     2 -> SignalItem(signal = item, isActive = isMobileDataActive)
-                    3 -> SignalItem(signal = item, isActive = false)
-                    4 -> SignalItem(signal = item, isActive = false)
+                    3 -> SignalItem(signal = item, isActive = isBluetoothActive)
+                    4 -> SignalItem(signal = item, isActive = isNfcActive)
                     5 -> SignalItem(signal = item, isActive = isGpsActive)
                 }
             }
@@ -89,9 +95,9 @@ fun SignalPresenceScreen() {
                 isWifiActive = checkWifiPresence(context)
                 isCellActive = checkCellPresence(context)
                 isMobileDataActive = checkMobileDataPresence(context)
-
-
-                isGpsActive = checkGpsStatus(context)
+                isBluetoothActive = checkBluetoothSignalPresence(context)
+                isNfcActive = checkNfcSignalPresence(context)
+                isGpsActive = checkGpsSignalPresence(context)
             })
     }
 }
