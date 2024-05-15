@@ -1,7 +1,6 @@
 package com.example.signaldetector.view.utils
 
 import android.Manifest
-import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
@@ -13,7 +12,6 @@ import android.nfc.NfcManager
 import android.telephony.SubscriptionManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-
 
 fun checkWifiPresence(context: Context): Boolean {
     val connectivityManager =
