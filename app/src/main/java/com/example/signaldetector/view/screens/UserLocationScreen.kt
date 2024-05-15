@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -76,7 +78,20 @@ fun UserLocationScreen() {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Text(text = address, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+        AnimatedVisibility(visible = address.isNotEmpty()) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp)
+                    .border(width = 1.dp, color = AccentColor, shape = RoundedCornerShape(15.dp))
+            ) {
+                Text(
+                    text = address,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.height(10.dp))
 
