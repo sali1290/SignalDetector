@@ -1,7 +1,7 @@
 package com.example.signaldetector.model.utils
 
 object LogKeys {
-    const val RESULT = "Result"
-    const val VIEWMODEL = "ViewModel"
-    const val REQUEST = "Request"
+    const val RESULT = "Result-Log"
+    const val VIEWMODEL = "ViewModel-Log"
+    const val REQUEST = "Request-Log"
 }
