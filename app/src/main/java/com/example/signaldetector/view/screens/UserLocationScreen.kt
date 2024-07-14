@@ -3,6 +3,7 @@ package com.example.signaldetector.view.screens
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
@@ -40,6 +41,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.signaldetector.R
+import com.example.signaldetector.model.utils.LogKeys
 import com.example.signaldetector.model.utils.getCurrentCellInfo
 import com.example.signaldetector.view.components.CustomButton
 import com.example.signaldetector.view.theme.AccentColor
@@ -130,16 +132,20 @@ fun UserLocationScreen() {
                     onDismissRequest = { expanded = !expanded }) {
                     listOf("lte", "gsm", "cdma").forEach {
                         DropdownMenuItem(text = { Text(text = it) }, onClick = {
-                            cellService = it
-                            expanded = false
-                            val allCellInfo = getCurrentCellInfo(context)
-                            val cellInfo = when (it) {
-                                "lte" -> allCellInfo[0]
-                                "gsm" -> allCellInfo[1]
-                                "cdma" -> allCellInfo[2]
-                                else -> allCellInfo[0]
+                            try {
+                                cellService = it
+                                expanded = false
+                                val allCellInfo = getCurrentCellInfo(context)
+                                val cellInfo = when (it) {
+                                    "lte" -> allCellInfo[0]
+                                    "gsm" -> allCellInfo[1]
+                                    "cdma" -> allCellInfo[2]
+                                    else -> allCellInfo[0]
+                                }
+                                cellLocationViewModel.getCellLocation(cellInfo)
+                            } catch (e: Exception) {
+                                Log.d(LogKeys.REQUEST, e.message ?: "Something went wrong")
                             }
-                            cellLocationViewModel.getCellLocation(cellInfo)
                         })
                     }
                 }
