@@ -33,7 +33,7 @@ class SIMCardRepoImpl @Inject constructor(
 
         if (ActivityCompat.checkSelfPermission(
                 context,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                Manifest.permission.READ_PHONE_STATE
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             throw IOException("Permission denied")
