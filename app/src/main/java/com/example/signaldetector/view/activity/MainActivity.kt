@@ -4,8 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,29 +29,37 @@ class MainActivity : ComponentActivity() {
         World.init(applicationContext)
         setContent {
             SignalDetectorTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    val navController = rememberNavController()
-                    NavHost(
-                        navController = navController,
-                        startDestination = Screen.MainScreen.route
-                    ) {
-                        composable(route = Screen.MainScreen.route) {
-                            MainScreen(navController)
-                        }
-                        composable(route = Screen.SIMInfoScreen.route) {
-                            SIMInfoScreen()
-                        }
-                        composable(route = Screen.UserLocationScreen.route) {
-                            UserLocationScreen()
-                        }
-                        composable(route = Screen.SignalPresenceScreen.route) {
-                            SignalPresenceScreen()
-                        }
-                    }
+                SignalDetectorNavHost()
+            }
+        }
+    }
+}
+
+@Composable
+fun SignalDetectorNavHost() {
+    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            val navController = rememberNavController()
+            NavHost(
+                navController = navController,
+                startDestination = Screen.MainScreen.route
+            ) {
+                composable(route = Screen.MainScreen.route) {
+                    MainScreen(navController)
+                }
+                composable(route = Screen.SIMInfoScreen.route) {
+                    SIMInfoScreen()
+                }
+                composable(route = Screen.UserLocationScreen.route) {
+                    UserLocationScreen()
+                }
+                composable(route = Screen.SignalPresenceScreen.route) {
+                    SignalPresenceScreen()
                 }
             }
         }
