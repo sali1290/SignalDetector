@@ -37,6 +37,7 @@ fun MainScreen(navController: NavController) {
             AppFeature(title = stringResource(id = R.string.sim_cards), icon = R.drawable.ic_sim),
             AppFeature(title = stringResource(R.string.location), icon = R.drawable.ic_location),
             AppFeature(title = stringResource(R.string.signal_presence), icon = R.drawable.ic_cell),
+            AppFeature(title = stringResource(R.string.wifi), icon = R.drawable.ic_wifi)
         )
 
     Column(
@@ -61,6 +62,7 @@ fun MainScreen(navController: NavController) {
                         0 -> navController.navigate(Screen.SIMInfoScreen.route)
                         1 -> navController.navigate(Screen.UserLocationScreen.route)
                         2 -> navController.navigate(Screen.SignalPresenceScreen.route)
+                        3 -> navController.navigate(Screen.WifiListScreen.route)
                     }
                 }
             }

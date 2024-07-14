@@ -18,6 +18,12 @@ fun checkPermissions(context: Context): Boolean {
         ) != PackageManager.PERMISSION_GRANTED
     ) return false
 
+    if (ActivityCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_WIFI_STATE
+        ) != PackageManager.PERMISSION_GRANTED
+    ) return false
+
     // All permissions granted
     return true
 }

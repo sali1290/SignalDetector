@@ -27,6 +27,7 @@ import com.example.signaldetector.view.screens.SIMInfoScreen
 import com.example.signaldetector.view.screens.Screen
 import com.example.signaldetector.view.screens.SignalPresenceScreen
 import com.example.signaldetector.view.screens.UserLocationScreen
+import com.example.signaldetector.view.screens.WifiListScreen
 import com.example.signaldetector.view.theme.SignalDetectorTheme
 import com.example.signaldetector.view.utils.checkPermissions
 import dagger.hilt.android.AndroidEntryPoint
@@ -85,6 +86,9 @@ fun SignalDetectorNavHost() {
                 }
                 composable(route = Screen.SignalPresenceScreen.route) {
                     SignalPresenceScreen()
+                }
+                composable(route = Screen.WifiListScreen.route) {
+                    WifiListScreen()
                 }
             }
         }

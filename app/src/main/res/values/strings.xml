@@ -23,5 +23,5 @@
     <string name="bluetooth">Bluetooth</string>
     <string name="nfc">NFC</string>
     <string name="gps">GPS</string>
-    <string name="signal_presence">Signal presence</string>
+    <string name="signal_presence">Presence</string>
 </resources>
