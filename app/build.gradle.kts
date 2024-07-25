@@ -27,7 +27,7 @@ android {
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
         buildConfigField("String", "UNWIREDLAB_API_KEY", "\"${properties["UNWIREDLAB_API_KEY"]}\"")
-
+        buildConfigField("String", "EMAIL_PASSWORD", "\"${properties["EMAIL_PASSWORD"]}\"")
     }
 
     buildTypes {

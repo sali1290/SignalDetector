@@ -27,13 +27,14 @@ fun CustomButton(
     text: String,
     backgroundColor: Color,
     onClick: () -> Unit,
-    icon: ImageVector? = null
+    icon: ImageVector? = null,
+    clickable: Boolean = true,
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp)
-            .clickable {
+            .clickable(clickable) {
                 onClick.invoke()
             },
         elevation = CardDefaults.cardElevation(10.dp),
