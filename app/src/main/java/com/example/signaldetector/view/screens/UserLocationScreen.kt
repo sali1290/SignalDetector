@@ -45,8 +45,21 @@ import com.example.signaldetector.model.utils.LogKeys
 import com.example.signaldetector.model.utils.getCurrentCellInfo
 import com.example.signaldetector.view.components.CustomButton
 import com.example.signaldetector.view.theme.AccentColor
+import com.example.signaldetector.view.theme.PrimaryColor
 import com.example.signaldetector.view.theme.Typography
 import com.example.signaldetector.viewmodel.CellLocationViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.util.Properties
+import javax.mail.Address
+import javax.mail.Authenticator
+import javax.mail.Message
+import javax.mail.MessagingException
+import javax.mail.Session
+import javax.mail.Transport
+import javax.mail.internet.AddressException
+import javax.mail.internet.MimeMessage
 
 @Composable
 fun UserLocationScreen() {
@@ -158,6 +171,12 @@ fun UserLocationScreen() {
             text = "Open map",
             backgroundColor = AccentColor,
             onClick = { openMapApp(context, latitude, longitude) })
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        CustomButton(text = "Send location to email", backgroundColor = PrimaryColor, onClick = {
+            sendEmail()
+        })
     }
 
     LaunchedEffect(key1 = cellLocationState.error) {
@@ -172,5 +191,53 @@ private fun openMapApp(context: Context, latitude: Double, longitude: Double) {
             "https://www.google.com/maps/dir/?api=1&destination=$latitude,$longitude"
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         context.startActivity(intent)
+    }
+}
+
+fun sendEmail() {
+    try {
+
+        val stringSenderEmail = "apptests1290@gmail.com"
+        val stringReceiverEmail = "arz1379n@gmail.com"
+        val stringPasswordSenderEmail = "rwnk hiyd ggrs rdzz"
+
+        val stringHost = "smtp.gmail.com"
+
+        val properties: Properties = System.getProperties()
+
+        properties.setProperty("mail.transport.protocol", "smtp")
+        properties.setProperty("mail.host", stringHost)
+        properties["mail.smtp.host"] = stringHost
+        properties["mail.smtp.port"] = "465"
+        properties["mail.smtp.socketFactory.fallback"] = "false"
+        properties.setProperty("mail.smtp.quitwait", "false")
+        properties["mail.smtp.socketFactory.port"] = "465"
+        properties["mail.smtp.starttls.enable"] = "true"
+        properties["mail.smtp.socketFactory.class"] = "javax.net.ssl.SSLSocketFactory"
+        properties["mail.smtp.ssl.enable"] = "true"
+        properties["mail.smtp.auth"] = "true"
+
+        val session: Session = Session.getInstance(properties, object : Authenticator() {
+            override fun getPasswordAuthentication(): javax.mail.PasswordAuthentication {
+                return javax.mail.PasswordAuthentication(
+                    stringSenderEmail,
+                    stringPasswordSenderEmail
+                )
+            }
+        })
+
+        val mimeMessage = MimeMessage(session)
+        mimeMessage.addRecipients(Message.RecipientType.TO, stringReceiverEmail)
+
+        mimeMessage.subject = "Subject: Android App email"
+        mimeMessage.setText("Hello Programmer, \n\nProgrammer World has sent you this 2nd email. \n\n Cheers!\nProgrammer World")
+
+        CoroutineScope(Dispatchers.IO).launch {
+            Transport.send(mimeMessage)
+        }
+    } catch (e: AddressException) {
+        Log.d(LogKeys.RESULT, e.message ?: "Something went wrong in address")
+    } catch (e: MessagingException) {
+        Log.d(LogKeys.RESULT, e.message ?: "Something went wrong in messaging")
     }
 }

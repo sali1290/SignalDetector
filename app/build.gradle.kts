@@ -103,6 +103,12 @@ dependencies {
 }
 
 dependencies {
+    implementation (files("libs/activation.jar"))
+    implementation (files("libs/additionnal.jar"))
+    implementation (files("libs/mail.jar"))
+}
+
+dependencies {
     val blonghoVersion = "v1.5.4-alpha-1"
     implementation("com.github.blongho:worldCountryData:$blonghoVersion")
 }
