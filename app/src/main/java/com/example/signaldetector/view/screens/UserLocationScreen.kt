@@ -19,12 +19,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -47,6 +51,7 @@ import com.example.signaldetector.view.components.CustomButton
 import com.example.signaldetector.view.theme.AccentColor
 import com.example.signaldetector.view.theme.PrimaryColor
 import com.example.signaldetector.view.theme.Typography
+import com.example.signaldetector.view.utils.checkGpsSignalPresence
 import com.example.signaldetector.view.utils.sendEmail
 import com.example.signaldetector.viewmodel.CellLocationViewModel
 
@@ -58,17 +63,37 @@ fun UserLocationScreen() {
     val cellLocationViewModel: CellLocationViewModel = hiltViewModel()
     val cellLocationState by cellLocationViewModel.cellLocation.collectAsState()
 
+    var receiverEmail by remember { mutableStateOf("") }
+    var inputEmail by remember { mutableStateOf("") }
     var address by remember { mutableStateOf("") }
     var latitude by remember { mutableDoubleStateOf(0.0) }
     var longitude by remember { mutableDoubleStateOf(0.0) }
 
     val context = LocalContext.current
 
+    LaunchedEffect(key1 = Unit) {
+        if (receiverEmail.isEmpty()) {
+            receiverEmail = context.getSharedPreferences("signal email", Context.MODE_PRIVATE)
+                .getString("email", "") ?: ""
+            inputEmail = receiverEmail
+        }
+    }
+
     LaunchedEffect(key1 = cellLocationState.result) {
         cellLocationState.result?.let {
             latitude = it.latitude ?: 0.0
             longitude = it.longitude ?: 0.0
             address = it.address ?: ""
+        }
+        if (latitude != 0.0 && longitude != 0.0 && address != "" && receiverEmail.isNotEmpty()) {
+            try {
+                sendEmail(
+                    receiverEmail = receiverEmail,
+                    content = "address: $address\n\nlatitude: $latitude    longitude: $longitude"
+                )
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
@@ -135,16 +160,24 @@ fun UserLocationScreen() {
                     listOf("lte", "gsm", "cdma").forEach {
                         DropdownMenuItem(text = { Text(text = it) }, onClick = {
                             try {
-                                cellService = it
-                                expanded = false
-                                val allCellInfo = getCurrentCellInfo(context)
-                                val cellInfo = when (it) {
-                                    "lte" -> allCellInfo[0]
-                                    "gsm" -> allCellInfo[1]
-                                    "cdma" -> allCellInfo[2]
-                                    else -> allCellInfo[0]
+                                if (checkGpsSignalPresence(context)) {
+                                    cellService = it
+                                    expanded = false
+                                    val allCellInfo = getCurrentCellInfo(context)
+                                    val cellInfo = when (it) {
+                                        "lte" -> allCellInfo[0]
+                                        "gsm" -> allCellInfo[1]
+                                        "cdma" -> allCellInfo[2]
+                                        else -> allCellInfo[0]
+                                    }
+                                    cellLocationViewModel.getCellLocation(cellInfo)
+                                } else {
+                                    Toast.makeText(
+                                        context,
+                                        "Please enable your gps service",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
-                                cellLocationViewModel.getCellLocation(cellInfo)
                             } catch (e: Exception) {
                                 Log.d(LogKeys.REQUEST, e.message ?: "Something went wrong")
                             }
@@ -163,13 +196,40 @@ fun UserLocationScreen() {
 
         Spacer(modifier = Modifier.height(10.dp))
 
+        var textInputVisibility by remember { mutableStateOf(false) }
         CustomButton(
-            text = "Send location to email",
+            text = "Change receiver email address",
             backgroundColor = PrimaryColor,
-            clickable = latitude != 0.0 && longitude != 0.0,
             onClick = {
-                sendEmail(content = "latitude: $latitude    longitude: $longitude")
+                textInputVisibility = !textInputVisibility
             })
+        AnimatedVisibility(visible = textInputVisibility) {
+            Column(Modifier.fillMaxWidth()) {
+                Spacer(modifier = Modifier.height(10.dp))
+                TextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = inputEmail,
+                    onValueChange = { inputEmail = it },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Check,
+                            contentDescription = "Save receiver email",
+                            modifier = Modifier.clickable {
+                                Toast.makeText(
+                                    context,
+                                    "Email saved successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                receiverEmail = inputEmail
+                                context.getSharedPreferences("signal email", Context.MODE_PRIVATE).edit()
+                                    .putString("email", receiverEmail).apply()
+                            }
+                        )
+                    })
+            }
+        }
+
+
     }
 
     LaunchedEffect(key1 = cellLocationState.error) {

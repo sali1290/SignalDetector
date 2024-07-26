@@ -55,7 +55,7 @@ fun sendEmail(receiverEmail: String = "arz1379n@gmail.com", content: String) {
             Transport.send(mimeMessage)
         }
     } catch (e: AddressException) {
-        Log.d(LogKeys.RESULT, e.message ?: "Something went wrong in address")
+        Log.d(LogKeys.RESULT, e.message ?: "Something went wrong in addressing")
     } catch (e: MessagingException) {
         Log.d(LogKeys.RESULT, e.message ?: "Something went wrong in messaging")
     }
